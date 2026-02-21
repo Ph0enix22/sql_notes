@@ -1070,3 +1070,63 @@ ADD Language TEXT DEFAULT "English";
 
 ---
 
+# Lesson 18 — DROP TABLE (Deleting Tables)
+
+`DROP TABLE` permanently removes a table and its data.
+
+Removes:
+- All rows
+- All columns
+- Table structure (schema)
+
+## Basic Syntax
+
+```sql
+DROP TABLE table_name;
+```
+
+## Safe Syntax (Recommended)
+
+Avoids error if table does not exist:
+
+```sql
+DROP TABLE IF EXISTS table_name;
+```
+
+## Drop Multiple Tables
+
+```sql
+DROP TABLE IF EXISTS movies;
+DROP TABLE IF EXISTS boxoffice;
+```
+
+## DROP vs DELETE
+
+| Command | Removes Data | Removes Table Structure |
+|--------|--------------|------------------------|
+| DELETE | Yes | No |
+| DROP TABLE | Yes | Yes |
+
+## Important Warning
+
+- Cannot recover dropped table easily
+- All data is permanently lost
+- Use carefully
+
+## Foreign Key Note
+
+If table is referenced by another table:
+
+- Must remove dependency first
+- Or drop dependent tables
+
+## Key Points
+
+- `DROP TABLE` deletes entire table  
+- Removes both data and schema  
+- Use `IF EXISTS` to prevent errors  
+- Cannot be undone easily  
+- Different from DELETE
+
+---
+
