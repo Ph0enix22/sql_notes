@@ -688,3 +688,234 @@ FROM → WHERE → GROUP BY → HAVING → SELECT → DISTINCT → ORDER BY → 
 
 ---
 
+# Lesson 13 — INSERT (Adding Data)
+
+## What is a Schema?
+
+A schema defines:
+- Table structure
+- Column names
+- Data types
+
+Example table:
+
+```
+movies
+------
+id (INTEGER)
+title (TEXT)
+director (TEXT)
+year (INTEGER)
+length_minutes (INTEGER)
+```
+
+## INSERT Syntax (All Columns)
+
+Insert values for all columns:
+
+```sql
+INSERT INTO table_name
+VALUES (value1, value2, value3, ...);
+```
+
+Example:
+
+```sql
+INSERT INTO movies
+VALUES (15, "Toy Story 4", "Josh Cooley", 2019, 100);
+```
+
+## INSERT Syntax (Specific Columns)
+
+Insert values into selected columns:
+
+```sql
+INSERT INTO table_name (column1, column2, column3)
+VALUES (value1, value2, value3);
+```
+
+Example:
+
+```sql
+INSERT INTO movies (title, director, year, length_minutes)
+VALUES ("Toy Story 4", "Josh Cooley", 2019, 100);
+```
+
+Useful when:
+- ID is auto-generated
+- Some columns have default values
+
+## Insert Multiple Rows
+
+```sql
+INSERT INTO table_name (column1, column2)
+VALUES 
+    (value1, value2),
+    (value3, value4);
+```
+
+Example:
+
+```sql
+INSERT INTO movies (title, director, year, length_minutes)
+VALUES 
+    ("Movie A", "Director A", 2020, 120),
+    ("Movie B", "Director B", 2021, 110);
+```
+
+## Insert with Expressions
+
+Expressions can be used while inserting:
+
+```sql
+INSERT INTO boxoffice (movie_id, rating, domestic_sales)
+VALUES (15, 8.7, 340000000 / 1000000);
+```
+
+## Example: Insert Toy Story 4
+
+Insert into movies table:
+
+```sql
+INSERT INTO movies (title, director, year, length_minutes)
+VALUES ("Toy Story 4", "Josh Cooley", 2019, 100);
+```
+
+Insert into boxoffice table:
+
+```sql
+INSERT INTO boxoffice (movie_id, rating, domestic_sales, international_sales)
+VALUES (15, 8.7, 340000000, 270000000);
+```
+
+## Key Points
+
+- `INSERT INTO` adds new rows  
+- Must match column order and values  
+- Can insert into specific columns  
+- Can insert multiple rows  
+- Can use expressions  
+- Useful for adding new data to database
+
+---
+
+# Lesson 14 — UPDATE (Modifying Existing Data)
+
+`UPDATE` is used to modify existing data in a table.
+
+## Basic Syntax
+
+```sql
+UPDATE table
+SET column = value_or_expression
+WHERE condition;
+```
+
+- `SET` specifies column and new value
+- `WHERE` specifies which rows to update
+
+## Update Multiple Columns
+
+```sql
+UPDATE table_name
+SET column1 = value1,
+    column2 = value2
+WHERE condition;
+```
+
+## Example: Update multiple columns
+
+```sql
+UPDATE movies
+SET title = "Toy Story 3",
+    director = "Lee Unkrich"
+WHERE id = 11;
+```
+
+## Important Warning
+
+If you omit `WHERE`, ALL rows will be updated:
+
+```sql
+UPDATE movies
+SET director = "Unknown";  -- affects entire table
+```
+
+Always use WHERE carefully.
+
+## Best Practice
+
+Test condition first with SELECT:
+
+```sql
+SELECT *
+FROM movies
+WHERE id = 11;
+```
+
+Then update:
+
+```sql
+UPDATE movies
+SET title = "Toy Story 3"
+WHERE id = 11;
+```
+
+## Using Expressions
+
+```sql
+UPDATE movies
+SET year = year + 1
+WHERE id = 3;
+```
+
+## Key Points
+
+- `UPDATE` modifies existing rows  
+- Use `SET` to assign new values  
+- Use `WHERE` to select specific rows  
+- Without WHERE, all rows are updated  
+- Can update multiple columns  
+- Can use expressions
+
+---
+
+# Lesson 15 — DELETE (Removing Data)
+
+`DELETE` removes rows from a table.
+
+## Basic Syntax
+
+```sql
+DELETE FROM table_name
+WHERE condition;
+```
+
+- `WHERE` specifies which rows to delete
+- Only matching rows are removed
+
+## Delete ALL rows
+
+```sql
+DELETE FROM table_name;
+```
+
+Removes every row in the table.
+
+## Delete using multiple conditions
+
+```sql
+DELETE FROM movies
+WHERE year < 2005 AND director = "John Lasseter";
+```
+
+## Key Points
+
+- `DELETE` removes rows from a table  
+- Use `WHERE` to select specific rows  
+- Without WHERE, all rows are deleted  
+- Always verify with SELECT first  
+- Deleted data cannot be recovered easily
+
+---
+
