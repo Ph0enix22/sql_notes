@@ -1004,3 +1004,69 @@ CREATE TABLE users (
 
 ---
 
+# Lesson 17 — ALTER TABLE (Modifying Table Structure)
+
+`ALTER TABLE` is used to modify an existing table.
+
+Used to:
+- Add columns
+- Remove columns
+- Rename table
+- Modify schema
+
+## Add Column Syntax
+
+```sql
+ALTER TABLE table_name
+ADD column_name DATA_TYPE;
+```
+
+## Add Column with Default Value
+
+```sql
+ALTER TABLE table_name
+ADD column_name DATA_TYPE OptionalTableConstraint
+  DEFAULT default_value;
+```
+
+## Remove Column Syntax
+
+```sql
+ALTER TABLE table_name
+DROP column_name;
+```
+
+## Rename Table Syntax
+
+```sql
+ALTER TABLE table_name
+RENAME TO new_table_name;
+```
+
+## Example: Add Multiple Columns
+
+```sql
+ALTER TABLE movies
+ADD Aspect_ratio FLOAT;
+
+ALTER TABLE movies
+ADD Language TEXT DEFAULT "English";
+```
+
+## What happens after adding column
+
+- New column added to table
+- Existing rows get default value or NULL
+- New rows use default value if not specified
+
+## Key Points
+
+- `ALTER TABLE` modifies existing tables  
+- `ADD` adds new column  
+- Can specify default value  
+- `RENAME TO` renames table  
+- Some databases (SQLite) don't support DROP COLUMN  
+- Used to update schema without deleting table
+
+---
+
