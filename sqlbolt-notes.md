@@ -566,3 +566,40 @@ With GROUP BY:
 
 ---
 
+# Lesson 11 — HAVING Clause (Filtering Aggregated Data)
+
+## Problem
+
+`WHERE` filters rows before grouping.
+
+But how do you filter after `GROUP BY`?
+
+Solution: Use `HAVING`.
+
+## HAVING Syntax
+
+```sql
+SELECT group_by_column, AGG_FUNC(column) AS agg_alias, ...
+FROM table_name
+WHERE condition
+GROUP BY column
+HAVING group_condition;
+```
+
+## WHERE vs HAVING
+
+| Clause | Filters |
+|------|---------|
+| WHERE | Individual rows |
+| HAVING | Groups |
+
+## Key Points
+
+- `HAVING` filters grouped data  
+- Used with `GROUP BY`  
+- `WHERE` filters rows before grouping  
+- `HAVING` filters after grouping  
+- Can use aggregate functions in HAVING
+
+---
+
