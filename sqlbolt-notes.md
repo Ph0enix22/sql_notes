@@ -919,3 +919,88 @@ WHERE year < 2005 AND director = "John Lasseter";
 
 ---
 
+# Lesson 16 — CREATE TABLE (Creating New Tables)
+
+`CREATE TABLE` is used to create a new table in a database.
+
+Defines:
+- Column names
+- Data types
+- Constraints
+- Default values
+
+## Basic Syntax
+
+```sql
+CREATE TABLE table_name (
+    column_name DATA_TYPE,
+    column_name DATA_TYPE
+);
+```
+
+## CREATE TABLE with IF NOT EXISTS
+
+Prevents error if table already exists:
+
+```sql
+CREATE TABLE IF NOT EXISTS table_name (
+    column_name DATA_TYPE
+);
+```
+
+## Example: Create Database Table
+
+```sql
+CREATE TABLE Database (
+    Name TEXT,
+    Version FLOAT,
+    Download_count INTEGER
+);
+```
+
+## Common Data Types
+
+| Data Type | Description |
+|---------|-------------|
+| `INTEGER` | Whole numbers |
+| `FLOAT`, `REAL`, `DOUBLE` | Decimal numbers |
+| `TEXT` | String or text |
+| `CHAR(n)` | Fixed-length string |
+| `VARCHAR(n)` | Variable-length string |
+| `BOOLEAN` | True or false |
+| `DATE` | Date |
+| `DATETIME` | Date and time |
+| `BLOB` | Binary data |
+
+## Common Constraints
+
+| Constraint | Description |
+|----------|-------------|
+| `PRIMARY KEY` | Unique identifier for each row |
+| `AUTOINCREMENT` | Automatically increments value |
+| `UNIQUE` | No duplicate values |
+| `NOT NULL` | Cannot store NULL |
+| `CHECK` | Ensures condition is true |
+| `FOREIGN KEY` | Links to another table |
+
+## Example with Constraints
+
+```sql
+CREATE TABLE users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    username TEXT UNIQUE NOT NULL,
+    age INTEGER CHECK(age >= 0)
+);
+```
+
+## Key Points
+
+- `CREATE TABLE` creates new tables  
+- Defines structure and schema  
+- Must specify column names and data types  
+- Constraints control allowed values  
+- `IF NOT EXISTS` prevents errors  
+- Required before inserting data
+
+---
+
