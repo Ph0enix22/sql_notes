@@ -298,3 +298,44 @@ Prevents ambiguity.
 
 ---
 
+# Lesson 7 — OUTER JOINs (LEFT, RIGHT, FULL)
+
+## Problem with INNER JOIN
+
+`INNER JOIN` returns only matching rows in both tables.
+
+Unmatched rows are excluded.
+
+## OUTER JOIN Types
+
+| JOIN Type | Returns |
+|----------|---------|
+| `LEFT JOIN` | All rows from left table + matching rows from right table |
+| `RIGHT JOIN` | All rows from right table + matching rows from left table |
+| `FULL JOIN` | All rows from both tables |
+
+Unmatched values appear as `NULL`(means no matching data exists).
+
+## Syntax
+
+```sql
+SELECT table1.column, table2.column
+FROM table1
+LEFT/RIGHT/FULL JOIN table2
+    ON table1.common_column = table2.common_column
+WHERE condition(s)
+ORDER BY column, … ASC/DESC
+LIMIT num_limit OFFSET num_offset;
+```
+
+## Key Points
+
+- `LEFT JOIN` keeps all rows from left table  
+- `RIGHT JOIN` keeps all rows from right table  
+- `FULL JOIN` keeps all rows from both tables  
+- Unmatched rows show `NULL`  
+- Use LEFT JOIN when you want all records from primary table  
+- INNER JOIN excludes unmatched rows
+
+---
+
