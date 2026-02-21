@@ -59,3 +59,62 @@ WHERE condition
 ## Notes
 
 - WHERE filters rows
+
+---
+
+# Lesson 3 — WHERE with Text Data
+
+## Syntax
+
+```sql
+SELECT column1, ...
+FROM table_name
+WHERE condition;
+```
+
+## Text Comparison Operators
+
+| Operator | Meaning | Example |
+|---------|---------|---------|
+| `=` | Exact match | `title = "Toy Story"` |
+| `!=` or `<>` | Not equal | `title != "Cars"` |
+| `LIKE` | Pattern match | `title LIKE "Toy%"` |
+| `NOT LIKE` | Does not match pattern | `title NOT LIKE "Toy%"` |
+| `IN (...)` | Matches any value in list | `director IN ("John Lasseter", "Brad Bird")` |
+| `NOT IN (...)` | Does not match any value in list | `director NOT IN ("John Lasseter")` |
+
+## Wildcards
+
+### `%` → Matches zero or more characters
+
+```sql
+title LIKE "%Toy%"
+```
+
+Matches:
+- Toy Story  
+- Toy Story 2  
+
+### `_` → Matches exactly one character
+
+```sql
+title LIKE "WALL-_"
+```
+
+Matches:
+- WALL-E  
+- WALL-G  
+
+Does NOT match:
+- WALL-EE
+
+## Key Points
+
+- Use `LIKE` for pattern matching  
+- `%` matches multiple characters  
+- `_` matches one character  
+- Use `IN` for matching multiple values  
+- Always use quotes for text values
+
+---
+
