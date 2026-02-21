@@ -603,3 +603,88 @@ HAVING group_condition;
 
 ---
 
+# Lesson 12 — Order of Execution of a Query
+
+## Complete SELECT Query Structure
+
+```sql
+SELECT DISTINCT column, AGG_FUNCTION(column_or_expression), ...
+FROM table AS t
+JOIN another_table as a
+    ON t.column = a.column
+WHERE condition
+GROUP BY column
+HAVING constraint_expression
+ORDER BY column ASC/DESC
+LIMIT num OFFSET num;
+```
+
+## Actual Execution Order
+
+SQL executes queries in this order:
+
+```text
+1. FROM / JOIN
+2. WHERE
+3. GROUP BY
+4. HAVING
+5. SELECT
+6. DISTINCT
+7. ORDER BY
+8. LIMIT / OFFSET
+```
+
+## Explanation
+
+### 1. FROM / JOIN
+- Selects tables
+- Combines tables using JOIN
+
+### 2. WHERE
+- Filters rows
+- Removes unwanted rows
+
+### 3. GROUP BY
+- Groups rows with same values
+- Used with aggregate functions
+
+### 4. HAVING
+- Filters grouped data
+
+### 5. SELECT
+- Chooses columns
+- Computes expressions
+
+### 6. DISTINCT
+- Removes duplicate rows
+
+### 7. ORDER BY
+- Sorts results
+
+### 8. LIMIT / OFFSET
+- Limits number of rows
+- Skips rows
+
+## Important Rules
+
+- `WHERE` filters before grouping  
+- `HAVING` filters after grouping  
+- Cannot use SELECT alias in WHERE  
+- Can use SELECT alias in ORDER BY  
+- LIMIT runs last  
+
+## Visual Flow
+
+```text
+FROM → WHERE → GROUP BY → HAVING → SELECT → DISTINCT → ORDER BY → LIMIT
+```
+
+## Key Points
+
+- SQL does NOT execute in written order  
+- Execution order is fixed internally  
+- Understanding order prevents logical errors  
+- Essential for GROUP BY and HAVING queries
+
+---
+
