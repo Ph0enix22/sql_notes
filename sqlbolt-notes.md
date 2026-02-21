@@ -339,3 +339,172 @@ LIMIT num_limit OFFSET num_offset;
 
 ---
 
+# Lesson 8 — NULL Values
+
+## What is NULL?
+
+`NULL` means missing, unknown, or no value.
+
+It is NOT:
+- 0
+- empty string ""
+- false
+
+It represents absence of data.
+
+## Why NULL exists
+
+Occurs when:
+
+- Data is missing
+- Data is not assigned yet
+- Using OUTER JOIN
+- Incomplete records
+
+Example:
+
+```
+name       building
+---------  --------
+Oliver P.  NULL
+```
+
+## Checking for NULL
+
+Use `IS NULL` or `IS NOT NULL`
+
+```sql
+building IS NULL
+building IS NOT NULL
+```
+
+## Syntax
+
+```sql
+SELECT column_name
+FROM table_name
+WHERE column_name IS NULL;
+```
+
+```sql
+SELECT column_name
+FROM table_name
+WHERE column_name IS NOT NULL;
+```
+
+## Why normal comparison doesn't work
+
+NULL is not equal to anything, including itself.
+
+This fails:
+
+```sql
+building = NULL
+```
+
+Because NULL means unknown value.
+
+## Key Points
+
+- `NULL` means missing or unknown data  
+- Use `IS NULL` to find missing values  
+- Use `IS NOT NULL` to find existing values  
+- Cannot use `=` or `!=` with NULL  
+- Common when using OUTER JOIN
+
+---
+
+# Lesson 9 — Queries with Expressions and Aliases
+
+An expression performs calculations or transformations on column values.
+
+Examples:
+- Arithmetic operations
+- Mathematical functions
+- String functions
+
+## Expression Syntax
+
+```sql
+SELECT column1 + column2
+FROM table_name;
+```
+
+## Using Aliases (AS)
+
+Aliases rename columns in the output for readability.
+
+### Syntax
+
+```sql
+SELECT expression AS alias_name
+FROM table_name;
+```
+
+## Expression Examples
+
+### Combined sales
+
+```sql
+SELECT domestic_sales + international_sales AS total_sales
+FROM boxoffice;
+```
+
+Output column will be named `total_sales`.
+
+### Convert sales to millions
+
+```sql
+SELECT (domestic_sales + international_sales) / 1000000 AS total_sales_millions
+FROM boxoffice;
+```
+
+### Convert rating to percentage
+
+```sql
+SELECT rating * 10 AS rating_percent
+FROM boxoffice;
+```
+
+### Find movies released in even years
+
+```sql
+SELECT title, year
+FROM movies
+WHERE year % 2 = 0;
+```
+
+`%` is modulo operator (returns remainder).
+
+## Table Aliases
+
+Used to shorten table names.
+
+### Syntax
+
+```sql
+SELECT t.column_name
+FROM table_name AS t;
+```
+
+## Column Alias Example with JOIN
+
+```sql
+SELECT m.title,
+       (b.domestic_sales + b.international_sales) AS total_sales
+FROM movies AS m
+INNER JOIN boxoffice AS b
+    ON m.id = b.movie_id;
+```
+
+## Key Points
+
+- Expressions perform calculations in queries  
+- Use `AS` to rename columns  
+- Improves readability  
+- Can combine multiple columns  
+- Can use arithmetic operators  
+- Table aliases simplify complex queries
+
+---
+
