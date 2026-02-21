@@ -198,3 +198,26 @@ Skips first 5 newest movies and returns the next 5 newest movies.
 
 ---
 
+# Lesson 5 — Review: Simple SELECT Queries
+
+## Full Query Syntax
+
+```sql
+SELECT column1, column2, ...
+FROM table_name
+WHERE condition(s)
+ORDER BY column ASC/DESC
+LIMIT number OFFSET number;
+```
+
+## Key Points
+
+- Combine multiple clauses in one query  
+- `WHERE` filters rows  
+- `ORDER BY` sorts rows  
+- `LIMIT` restricts results  
+- `OFFSET` skips rows  
+- All clauses work together to answer specific questions
+
+---
+
