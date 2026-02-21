@@ -118,3 +118,83 @@ Does NOT match:
 
 ---
 
+# Lesson 4 — DISTINCT, ORDER BY, LIMIT, OFFSET
+
+## DISTINCT — Remove duplicate values
+
+Returns only unique values from a column.
+
+### Syntax
+
+```sql
+SELECT DISTINCT column1, column2, ...
+FROM table_name
+WHERE condition(s);
+```
+
+## ORDER BY — Sort results
+
+Sorts query results in ascending or descending order.
+
+### Syntax
+
+```sql
+SELECT column1, column2, ...
+FROM table_name
+ORDER BY column_name ASC;
+```
+
+```sql
+SELECT column_name
+FROM table_name
+ORDER BY column_name DESC;
+```
+
+- `ASC` → ascending (default)
+- `DESC` → descending
+
+## LIMIT — Restrict number of rows
+
+Returns only a specified number of rows.
+
+### Syntax
+
+```sql
+SELECT column1, column2, ...
+FROM table_name
+LIMIT num;
+```
+
+## OFFSET — Skip rows
+
+Skips a specified number of rows before returning results.
+
+### Syntax
+
+```sql
+SELECT column1, column2, ...
+FROM table_name
+LIMIT num_limit OFFSET num_offset;
+```
+
+## Combined Example
+
+```sql
+SELECT title, year
+FROM movies
+ORDER BY year DESC
+LIMIT 5 OFFSET 5;
+```
+
+Skips first 5 newest movies and returns the next 5 newest movies.
+
+## Key Points
+
+- `DISTINCT` removes duplicate values  
+- `ORDER BY` sorts results  
+- `ASC` = ascending, `DESC` = descending  
+- `LIMIT` restricts number of rows returned  
+- `OFFSET` skips rows before returning results  
+
+---
+
