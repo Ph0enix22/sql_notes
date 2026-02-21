@@ -508,3 +508,61 @@ INNER JOIN boxoffice AS b
 
 ---
 
+# Lesson 10 — Aggregate Functions (Pt. 1)
+
+Aggregate functions perform calculations on multiple rows and return a single value.
+
+Used for:
+- Counting rows
+- Finding averages
+- Finding minimum/maximum values
+- Finding totals
+
+## Basic Syntax
+
+```sql
+SELECT AGG_FUNCTION(column_name) AS alias_name
+FROM table_name;
+```
+
+## Common Aggregate Functions
+
+| Function | Description |
+|--------|-------------|
+| `COUNT(*)` | Counts total number of rows |
+| `COUNT(column)` | Counts non-NULL values |
+| `MIN(column)` | Finds smallest value |
+| `MAX(column)` | Finds largest value |
+| `AVG(column)` | Finds average value |
+| `SUM(column)` | Finds total sum |
+
+## GROUP BY — Aggregate by groups
+
+Groups rows with same value and applies aggregate function to each group.
+
+### Syntax
+
+```sql
+SELECT column, AGG_FUNCTION(column_or_expression)
+FROM table_name
+GROUP BY column;
+```
+
+## Important Notes
+
+Without GROUP BY:
+- Aggregate runs on entire table
+- Returns one row
+
+With GROUP BY:
+- Aggregate runs per group
+- Returns multiple rows
+
+## Key Points
+
+- Aggregate functions summarize data  
+- `GROUP BY` groups rows for aggregation  
+- Use `AS` to name results clearly
+
+---
+
