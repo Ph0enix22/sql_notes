@@ -221,3 +221,80 @@ LIMIT number OFFSET number;
 
 ---
 
+# Lesson 6 — Multi-table Queries with INNER JOIN
+
+In normalized databases, related data is stored in separate tables.
+
+Example:
+- `movies` → movie info
+- `boxoffice` → ratings and sales
+
+JOIN combines related data using a common key (`movie_id`).
+
+## INNER JOIN Syntax
+
+```sql
+SELECT table1.column, table2.column
+FROM table1
+INNER JOIN table2
+    ON table1.common_column = table2.common_column
+WHERE condition(s)
+ORDER BY COLUMN, ... ASC/DESC
+LIMIT num OFFSET num;
+```
+
+## How INNER JOIN works
+
+- Matches rows from both tables
+- Uses a shared key (`id`, `movie_id`, etc.)
+- Returns only matching rows
+- Combines columns from both tables
+
+---
+
+## Example Tables
+
+movies:
+- id
+- title
+- director
+- year
+
+boxoffice:
+- movie_id
+- rating
+- domestic_sales
+- international_sales
+
+Common key:
+```sql
+movies.id = boxoffice.movie_id
+```
+
+## Column Reference Format
+
+Use this format when working with multiple tables:
+
+```sql
+table_name.column_name
+```
+
+Example:
+
+```sql
+movies.title
+boxoffice.rating
+```
+
+Prevents ambiguity.
+
+## Key Points
+
+- `INNER JOIN` combines rows from two tables  
+- Uses common key with `ON`  
+- Returns only matching rows  
+- Use `table.column` format  
+- Can combine with `WHERE`, `ORDER BY`, `LIMIT`
+
+---
+
