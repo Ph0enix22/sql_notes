@@ -20,7 +20,10 @@ This repo contains my structured SQL learning notes, practice, and reference mat
 ```
 sql-notes/
 │
-├── sqlbolt-notes.md 
+├── sqlbolt-notes.md ✅
+├── regexone-notes.md (soon)
+├── kaggle-sql-notes.md (later)
+├── gfg-sql-notes.md (later)
 └── README.md
 ```
 
