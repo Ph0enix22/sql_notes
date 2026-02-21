@@ -1,7 +1,6 @@
 # SQLBolt Notes
 
 Source: https://sqlbolt.com  
-Status: Completed ✅  
 
 ---
 
@@ -1130,3 +1129,378 @@ If table is referenced by another table:
 
 ---
 
+# SQL Topic — Subqueries
+
+A subquery is a query inside another query.
+
+Used to:
+- Filter data
+- Compare values
+- Generate dynamic values
+
+Subquery runs first, outer query runs second.
+
+## Basic Syntax
+
+```sql
+SELECT column_name
+FROM table_name
+WHERE column_name OPERATOR (
+    SELECT column_name
+    FROM table_name
+);
+```
+
+## Subquery with IN
+
+Used to match values from another table.
+
+```sql
+SELECT *
+FROM employees
+WHERE department IN (
+    SELECT department
+    FROM departments
+);
+```
+
+## Subquery in FROM (Derived Table)
+
+```sql
+SELECT *
+FROM (
+    SELECT title, year
+    FROM movies
+) AS movie_list;
+```
+
+Subquery acts like a temporary table.
+
+## Correlated Subquery
+
+Inner query depends on outer query.
+
+Runs once per outer row.
+
+```sql
+SELECT *
+FROM employees
+WHERE salary > (
+    SELECT AVG(revenue_generated)
+    FROM employees AS dept
+    WHERE dept.department = employees.department
+);
+```
+
+Calculates average per department.
+
+## EXISTS / NOT IN Example
+
+```sql
+SELECT *
+FROM movies
+WHERE id IN (
+    SELECT movie_id
+    FROM boxoffice
+);
+```
+
+Returns movies that exist in boxoffice.
+
+## Key Points
+
+- Subquery = query inside query  
+- Written inside parentheses `()`  
+- Executes before outer query  
+- Can be used in SELECT, FROM, WHERE  
+- Correlated subquery runs per row  
+- Useful for dynamic filtering
+
+# SQL Topic — UNION, INTERSECT, EXCEPT
+
+Set operators combine results of multiple SELECT queries.
+
+Requirements:
+- Same number of columns
+- Same column order
+- Same data types
+
+## UNION
+
+Combines results and removes duplicates.
+
+```sql
+SELECT column_name
+FROM table1
+UNION
+SELECT column_name
+FROM table2;
+```
+
+## UNION ALL
+
+Combines results and keeps duplicates.
+
+```sql
+SELECT column_name
+FROM table1
+UNION ALL
+SELECT column_name
+FROM table2;
+```
+
+## INTERSECT
+
+Returns only common rows in both queries.
+
+```sql
+SELECT column_name
+FROM table1
+INTERSECT
+SELECT column_name
+FROM table2;
+```
+
+## EXCEPT
+
+Returns rows from first query NOT in second query.
+
+```sql
+SELECT column_name
+FROM table1
+EXCEPT
+SELECT column_name
+FROM table2;
+```
+
+Order matters.
+
+## Execution Order
+
+```text
+SELECT → UNION / INTERSECT / EXCEPT → ORDER BY → LIMIT
+```
+
+## Key Differences
+
+| Operator | Result |
+|--------|--------|
+| UNION | Combines, removes duplicates |
+| UNION ALL | Combines, keeps duplicates |
+| INTERSECT | Common rows only |
+| EXCEPT | Rows only in first query |
+
+## Key Points
+
+- Combines results from multiple queries  
+- Queries must have same structure  
+- UNION removes duplicates  
+- UNION ALL keeps duplicates  
+- INTERSECT finds common rows  
+- EXCEPT finds unique rows in first query
+
+---
+
+# Advanced Understanding — Subquery Mental Models
+
+## IN Subquery — Mental Model
+
+### Core Idea
+
+IN subquery works in 2 steps:
+
+```
+Step 1: Inner query creates a list
+Step 2: Outer query checks each row against that list
+```
+
+### Example Tables
+
+customers:
+
+| id | name |
+|---|---|
+| 1 | Alice |
+| 2 | Bob |
+| 3 | Charlie |
+| 4 | David |
+
+orders:
+
+| order_id | customer_id |
+|---|---|
+| 101 | 1 |
+| 102 | 3 |
+
+---
+
+### Query
+
+```sql
+SELECT *
+FROM customers
+WHERE id IN (
+    SELECT customer_id
+    FROM orders
+);
+```
+
+### Step 1 — Inner query runs first
+
+```sql
+SELECT customer_id FROM orders;
+```
+
+Result:
+
+```
+[1, 3]
+```
+
+Database creates list:
+
+```
+LIST = [1, 3]
+```
+
+### Step 2 — Outer query checks each row
+
+```
+Alice   id=1 → in list → YES
+Bob     id=2 → in list → NO
+Charlie id=3 → in list → YES
+David   id=4 → in list → NO
+```
+
+### Final Result
+
+```
+Alice
+Charlie
+```
+
+### Mental Model
+
+```
+Build list → Check each row
+```
+
+### Key Rule
+
+IN subquery runs inner query ONCE.
+
+---
+
+## Correlated Subquery — Mental Model
+
+### Core Idea
+
+Correlated subquery runs inner query for EACH row.
+
+```
+FOR EACH ROW → run inner query using that row
+```
+
+### Example Table
+
+numbers:
+
+| num |
+|---|
+| 1 |
+| 2 |
+| 3 |
+| 4 |
+
+### Query
+
+```sql
+SELECT num
+FROM numbers n1
+WHERE num > (
+    SELECT AVG(num)
+    FROM numbers n2
+    WHERE n2.num <= n1.num
+);
+```
+
+### Execution Visualization
+
+num = 1  
+inner query → avg(1) = 1  
+check → 1 > 1 → NO  
+
+num = 2  
+inner query → avg(1,2) = 1.5  
+check → 2 > 1.5 → YES  
+
+num = 3  
+inner query → avg(1,2,3) = 2  
+check → YES  
+
+num = 4  
+inner query → avg(1,2,3,4) = 2.5  
+check → YES  
+
+### Final Result
+
+```
+2
+3
+4
+```
+
+### Mental Model
+
+Inner query changes per row:
+
+```
+num=1 → run query using 1
+num=2 → run query using 2
+num=3 → run query using 3
+num=4 → run query using 4
+```
+
+### Key Rule
+
+Correlated subquery runs MANY times (once per row).
+
+## Final Intuition Summary
+
+Existence(IN) subquery:
+
+```
+Make list → check list
+```
+
+Correlated subquery:
+
+```
+For each row → run query again
+```
+
+JOIN:
+
+```
+Combine tables directly
+```
+
+----------------------------------
+
+# SQLBolt Course: Fully Completed
+
+Date completed: 21-02-2026
+
+---
+
+# Notes Purpose
+
+This document serves as:
+
+- Personal SQL reference
+- Revision guide
+- Long-term knowledge base
+
+----------------------------------
+
+End of SQLBolt Notes 💖
