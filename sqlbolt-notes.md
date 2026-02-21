@@ -25,7 +25,7 @@ FROM table_name;
 
 - SELECT retrieves data
 - FROM specifies table
-- * means all columns
+- `*` means all columns
 
 ---
 
@@ -55,7 +55,6 @@ WHERE condition
 | `NOT BETWEEN ... AND ...` | Outside range | `age NOT BETWEEN 18 AND 25` |
 | `IN (...)` | Matches any value in list | `age IN (18, 21, 25)` |
 | `NOT IN (...)` | Does not match any value in list | `age NOT IN (18, 21, 25)` |
-```
 
 ## Notes
 
