@@ -11,6 +11,7 @@ This repo contains my structured SQL learning notes, practice, and reference mat
 ---
 
 ### In Progress (Planned)
+- regexone-notes.md 🦭
 
 ---
 
