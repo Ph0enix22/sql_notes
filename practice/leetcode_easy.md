@@ -60,3 +60,22 @@ ORDER BY rating DESC;
 ```
 
 ---
+
+## 584. Find Customer Referee  
+**Concept:** NULL handling, WHERE condition  
+
+### Requirement
+- Return customers  
+- Whose `referee_id` is NOT 2  
+- Include customers where `referee_id` is NULL  
+
+### Solution
+
+```sql
+SELECT name
+FROM customer
+WHERE referee_id IS NULL
+   OR referee_id != 2;
+```
+
+---
