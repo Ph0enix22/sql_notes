@@ -40,3 +40,23 @@ WHERE e1.salary > e2.salary;
 ```
 
 ---
+
+## 620. Not Boring Movies  
+**Concept:** WHERE filtering, MOD operator, ORDER BY  
+
+### Requirement
+- Select movies with odd `id`  
+- Exclude movies with description = "boring"  
+- Sort by rating in descending order  
+
+### Solution
+
+```sql
+SELECT *
+FROM cinema
+WHERE id % 2 != 0
+  AND description != 'boring'
+ORDER BY rating DESC;
+```
+
+---
