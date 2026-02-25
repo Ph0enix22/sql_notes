@@ -20,3 +20,23 @@ LEFT JOIN address AS a
 ```
 
 ---
+
+## 181. Employees Earning More Than Their Managers  
+**Concept:** Self JOIN  
+
+### Requirement
+- Compare each employee’s salary  
+- With their manager’s salary  
+- Return employees earning more than their manager  
+
+### Solution
+
+```sql
+SELECT e1.name AS Employee
+FROM employee e1
+JOIN employee e2
+    ON e1.managerid = e2.id
+WHERE e1.salary > e2.salary;
+```
+
+---
