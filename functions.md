@@ -6,5 +6,7 @@
 - If decimal_places not given → rounds to nearest integer
 
 Example:
+```sql
 SELECT ROUND(AVG(population))
 FROM city;
+```
