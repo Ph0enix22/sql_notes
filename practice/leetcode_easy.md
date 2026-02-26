@@ -79,3 +79,21 @@ WHERE referee_id IS NULL
 ```
 
 ---
+
+## 182. Duplicate Emails  
+**Concept:** GROUP BY, HAVING, COUNT()  
+
+### Requirement
+- Find emails that appear more than once  
+- Return only duplicate email values  
+
+### Solution
+
+```sql
+SELECT email
+FROM person
+GROUP BY email
+HAVING COUNT(email) > 1;
+```
+
+---
