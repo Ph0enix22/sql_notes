@@ -10,3 +10,13 @@ Example:
 SELECT ROUND(AVG(population))
 FROM city;
 ```
+
+### FLOOR()
+- Rounds a number "down" to the nearest integer.
+- Syntax: FLOOR(number)
+
+Example:
+```sql
+SELECT FLOOR(AVG(population))
+FROM city;
+```
