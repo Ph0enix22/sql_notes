@@ -116,3 +116,22 @@ LIMIT 1;
 ```
 
 ---
+
+## 183. Customers Who Never Order  
+**Concept:** LEFT JOIN, NULL filtering  
+
+### Requirement
+- Return customers  
+- Who never placed an order  
+
+### Solution
+
+```sql
+SELECT c.name AS Customers
+FROM customers AS c
+LEFT JOIN orders AS o
+    ON c.id = o.customerid
+WHERE o.customerid IS NULL;
+```
+
+---
