@@ -20,12 +20,16 @@ This repo contains my structured SQL learning notes, practice, and reference mat
 ```
 sql-notes/
 │
+├── concepts/
+│   ├── case-logic.md
+│   └── functions.md
+├── notes/
+│   └── sqlbolt-notes.md ✅
+│   ├── regexone-notes.md (soon)
+│   ├── kaggle-sql-notes.md (later)
+│   └── gfg-sql-notes.md (later)
 ├── practice/
 │   └── leetcode_easy.md
-├── sqlbolt-notes.md ✅
-├── regexone-notes.md (soon)
-├── kaggle-sql-notes.md (later)
-├── gfg-sql-notes.md (later)
 └── README.md
 ```
 
