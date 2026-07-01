@@ -152,3 +152,21 @@ JOIN product p
 ```
 
 ---
+
+## 181. Employees Earning More Than Their Managers
+**Concept:** SELF JOIN
+
+### Requirement
+- Compare each employee's salary with their manager's AND return employees earning more than their manager
+
+### Solution
+
+```sql
+SELECT e.name AS employee
+FROM employee e
+JOIN employee m
+    ON e.managerid = m.id
+WHERE e.salary > m.salary;
+```
+
+---
